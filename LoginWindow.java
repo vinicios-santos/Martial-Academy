@@ -16,8 +16,10 @@ import javax.swing.table.DefaultTableModel;
 public class LoginWindow extends JFrame {
 	
 	private JLabel lblUsuario;
+	private JLabel lblPassword;
 	private JTextField txfUsuario;
 	private JPasswordField psfUsuario;
+	private JButton buttonEnviar;
 	private JComboBox<String> cbxPerfil;
 	private JCheckBox chkHabilitado;
 	private JTextArea txaObservacao;
@@ -29,11 +31,11 @@ public class LoginWindow extends JFrame {
 	
 	public LoginWindow() {
 		setSize(500, 300);
-		setTitle("Cadastro de usuários");
+		setTitle("Cadastro de usuarios");
 		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		lblUsuario = new JLabel("Usuário:");
+		lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
 		lblUsuario.setBounds(20, 20, 130, 25);
 		getContentPane().add(lblUsuario);
@@ -41,6 +43,19 @@ public class LoginWindow extends JFrame {
 		txfUsuario = new JTextField();
 		txfUsuario.setBounds(150, 20, 150, 25);
 		getContentPane().add(txfUsuario);
+
+		lblPassword = new JLabel("Senha");
+		lblPassword.setFont(new Font(Font.MONOSPACED, Font.BOLD, 22));
+		lblPassword.setBouds(20, 20, 130, 25);
+		getContentPane().add(lblPassword);
+
+		psfUsuario = new JPasswordField();
+		psfUsuario.setBounds(150, 20, 150, 25);
+		getContentPanel().add(psfUsuario);
+
+		buttonEnviar = new Jbutton("Enviar");
+		buttonEnviar.setBounds(100, 100, 100, 100);
+		getContentPanel().add(buttonEnviar);
 	}
 
 	public static void main(String[] args) {

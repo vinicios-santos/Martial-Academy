@@ -27,16 +27,13 @@ public class MenuWindow {
 	
 	private JFrame framePrincipal;
 	
-	/**
-	 * Construtor.
-	 */
 	public MenuWindow() {
 		
 		menuBar = new JMenuBar();
 		
 			menuSistema = new JMenu("Sistema");
 				itemSistemaUsuario = new JMenuItem();
-				itemSistemaUsuario.setAction(new AbstractAction("Usuário") {
+				itemSistemaUsuario.setAction(new AbstractAction("Usuario") {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -66,5 +63,4 @@ public class MenuWindow {
 	public static void main(String[] args) {
 		new MenuWindow();
 	}
-
 }
