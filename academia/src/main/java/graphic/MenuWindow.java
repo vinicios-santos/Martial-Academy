@@ -46,8 +46,16 @@ public class MenuWindow {
 			menuSistema.add(itemSistemaSair);
 			
 			menuCadastro = new JMenu("Cadastro");
-				itemCadastroAluno = new JMenuItem("Aluno");
-				itemCadastroModalidade = new JMenuItem("Modalidade");
+				itemCadastroAluno = new JMenuItem();
+                                itemCadastroAluno.setAction(new AbstractAction("Aluno") {
+                                
+                			@Override
+					public void actionPerformed(ActionEvent e) {
+						new CadastroAluno().setVisible(true);
+					}
+                                });
+                                
+                        itemCadastroModalidade = new JMenuItem("Modalidade");
 			menuCadastro.add(itemCadastroAluno);
 			menuCadastro.add(itemCadastroModalidade);
 			
