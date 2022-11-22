@@ -1,0 +1,90 @@
+-----usuario------
+
+INSERT INTO public.usuarios(
+	id, usuario, senha, perfil)
+	VALUES (1, 'admin', '123', 1);
+
+
+------  Aluno  -------
+
+	INSERT INTO public.alunos(
+    codigo_aluno, aluno, data_nascimento, sexo, telefone, celular, email, observacao, endereco, cidade, estado, pais, numero, complemento, bairro, cep)
+    VALUES (1, 'joao', '2003-09-04', 'M', '48991186733', '48991186733', 'joao@email.com', 'nada', 'rua', 'criciuma', 'SC', 'BR', '100', 'nada nada', 'centro', '88888-888');
+
+
+INSERT INTO public.alunos(
+	codigo_aluno, aluno, data_nascimento, sexo, telefone, celular, email, endereco, cidade, estado, pais, numero, complemento, bairro, cep)
+	VALUES (2, 'Marcos dos Santos','2002-09-05', 'M', '48991181818', '48996699889', 'Marcos@email.com', 'Rua dos bobos', 'Porto Alegre', 'RS', 'BR', '150', 'Começo da rua', 'Centro', '99999-999');
+
+
+
+-----  Assiduidade  --------
+
+INSERT INTO public.assiduidade(
+	codigo_matricula, data_entrada)
+	VALUES (1, '2001-09-10');
+
+-----  Cidade  ---------
+
+INSERT INTO public.cidades(
+	id, cidade, estado, pais)
+	VALUES (1, 'Criciuma', 'SC', 'Brasil');
+
+-------  Faturas  ------------
+
+INSERT INTO public.faturas(
+	id, codigo_matricula, data_vencimento, valor, data_pagamento, data_cancelamento)
+	VALUES (1, 1, '2022-09-10', 100.0, '2019-09-10', '2023-09-10');
+
+INSERT INTO public.faturas(
+	id, codigo_matricula, data_vencimento, valor, data_pagamento, data_cancelamento)
+	VALUES (2, 2, '2022-08-08', 90.5, '2022-09-09', '2022-10-10');
+
+-------  graduação  ---------
+
+INSERT INTO public.graduacoes(
+	id, graduacao, modalidade)
+	VALUES (1, 'Faixa Preta', 'Karate');
+
+------- matriculas ----------
+
+INSERT INTO public.matriculas(
+	codigo_matricula, codigo_aluno, data_matricula, dia_vencimento, data_encerramento)
+	VALUES (1, 1, '2003-09-10', '2022-09-10', '2003-09-10');
+
+INSERT INTO public.matriculas(
+	codigo_matricula, codigo_aluno, data_matricula, dia_vencimento, data_encerramento)
+	VALUES (2, 2, '2022-08-08', '2022-10-20', '2025-09-09');
+
+------- Matricula Modalidade -----------
+
+INSERT INTO public.matriculas_modalidades(
+	codigo_matricula, modalidades, graduacao, plano, data_inicio, data_fim)
+	VALUES (1, 'Karate', 'Faixa Preta', 'Basico', '2022-09-10', '2022-10-12');
+
+INSERT INTO public.matriculas_modalidades(
+	codigo_matricula, modalidades, graduacao, plano, data_inicio, data_fim)
+	VALUES (2, 'Karate', 'Faixa Preta', 'Basico', '2021-01-01', '2023-02-02');
+
+-------- Modalidade ------------
+
+INSERT INTO public.modalidades(
+	id, modalidade)
+	VALUES (1, 'Karate');
+
+------- Plano ------------
+
+INSERT INTO public.planos(
+	id, descricao, modalidade, plano)
+	VALUES (1, 'Basico', 'Karate', 'Basico');
+
+
+------ FATURAS MATRICULAS ------------
+
+INSERT INTO public.faturas_matriculas(
+	id, codigo_matricula, data_vencimento, valor, data_pagamento, data_cancelamento)
+	VALUES (1, 1, '2022-09-10', 100.0, '2019-09-10', '2023-09-10');
+
+INSERT INTO public.faturas_matriculas(
+	id, codigo_matricula, data_vencimento, valor, data_pagamento, data_cancelamento)
+	VALUES (2, 2, '2018-09-10', 90.5, NULL, NULL);
