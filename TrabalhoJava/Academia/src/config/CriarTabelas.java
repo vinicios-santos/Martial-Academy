@@ -7,25 +7,27 @@ import java.sql.SQLException;
 
 public class CriarTabelas {
 	
-	private static final String criarUsuarios = "CREATE TABLE usuarios (ID SERIAL PRIMARY KEY, USUARIO VARCHAR(60), SENHA VARCHAR(60), PERFIL INT)";
+	private static final String criarUsuarios = "CREATE TABLE IF NOT EXISTS usuarios (ID SERIAL PRIMARY KEY, USUARIO VARCHAR(60), SENHA VARCHAR(60), PERFIL INT)";
 	
-	private static final String criarAlunos = "CREATE TABLE alunos (ID SERIAL PRIMARY KEY, NOME VARCHAR(60), DATA_NACIMENTO TIMESTAMP, SEXO INT, TELEFONE INT, CELULAR INT, EMAIL VARCHAR(60), OBSERVACAO VARCHAR(60), LOGRADOURO VARCHAR(60), CIDADE_CODIGO INT, NUMERO INT, COMPLEMENTO VARCHAR(60), BAIRRO VARCHAR(60), CEP INT)";
+	private static final String criarAlunos = "CREATE TABLE IF NOT EXISTS alunos (CODIGO_ALUNO SERIAL PRIMARY KEY, ALUNO VARCHAR(60), DATA_NASCIMENTO TIMESTAMP, SEXO CHAR(1), TELEFONE VARCHAR(60), CELULAR VARCHAR(60), EMAIL VARCHAR(60), OBSERVACAO VARCHAR(60), ENDERECO  VARCHAR(60), CIDADE VARCHAR(60), ESTADO CHAR(2), PAIS VARCHAR(60), NUMERO VARCHAR(60), COMPLEMENTO VARCHAR(60), BAIRRO VARCHAR(60), CEP VARCHAR(60))";
 	
-	private static final String criarAssiduidade = "CREATE TABLE assiduidade (MATRICULAS_CODIGO INT, DATA_ENTRADA TIMESTAMP)";
+	private static final String criarAssiduidade = "CREATE TABLE IF NOT EXISTS assiduidade (CODIGO_MATRICULA INT NOT NULL, DATA_ENTRADA TIMESTAMP NOT NULL DEFAULT localtimestamp)";
 	
-	private static final String criarCidades = "CREATE TABLE cidades (ID SERIAL PRIMARY KEY, CIDADE VARCHAR(60), ESTADO VARCHAR(60), PAIS VARCHAR(60))";
+	private static final String criarCidades = "CREATE TABLE IF NOT EXISTS cidades (ID SERIAL PRIMARY KEY, CIDADE VARCHAR(60) NOT NULL, ESTADO CHAR(2) NOT NULL, PAIS VARCHAR(60) NOT NULL)";
 	
-	private static final String criarFaturas = "CREATE TABLE faturas (ID SERIAL PRIMARY KEY, MATRICULAS_CODIGO INT, VENCIMENTO TIMESTAMP, VALOR FLOAT(5), PAGAMENTO TIMESTAMP, CANCELAMENTO TIMESTAMP, OBSERVACAO VARCHAR(60))";
+	private static final String criarFaturas = "CREATE TABLE IF NOT EXISTS faturas (ID SERIAL PRIMARY KEY, CODIGO_MATRICULA INT NOT NULL, DATA_VENCIMENTO TIMESTAMP NOT NULL, VALOR FLOAT(5) NOT NULL, DATA_PAGAMENTO TIMESTAMP, DATA_CANCELAMENTO TIMESTAMP)";
 	
-	private static final String criarGraduacoes = "CREATE TABLE graduacoes (ID SERIAL PRIMARY KEY, DESCRICAO VARCHAR(60), MODALIDADES_CODIGO INT)";
+	private static final String criarGraduacoes = "CREATE TABLE IF NOT EXISTS graduacoes (ID SERIAL PRIMARY KEY, GRADUACAO VARCHAR(60), MODALIDADE VARCHAR(60))";
+        
+        private static final String criarFaturasMatriculas = "CREATE TABLE IF NOT EXISTS faturas_matriculas (ID SERIAL PRIMARY KEY, CODIGO_MATRICULA INT NOT NULL, DATA_VENCIMENTO DATE NOT NULL, VALOR FLOAT(5) NOT NULL, DATA_PAGAMENTO TIMESTAMP, DATA_CANCELAMENTO DATE)";
 	
-	private static final String criarMatriculas = "CREATE TABLE matriculas (ID SERIAL PRIMARY KEY, ALUNOS_CODIGO INT, DATA_MATRICULA TIMESTAMP, DATA_VENCIMENTO TIMESTAMP, DATA_ENCERRAMENTO TIMESTAMP)";
+	private static final String criarMatriculas = "CREATE TABLE IF NOT EXISTS matriculas (CODIGO_MATRICULA SERIAL PRIMARY KEY, codigo_aluno INT NOT NULL, DATA_MATRICULA TIMESTAMP, DIA_VENCIMENTO TIMESTAMP, DATA_ENCERRAMENTO TIMESTAMP)";
 	
-	private static final String criarModalidades = "CREATE TABLE modalidades (ID SERIAL PRIMARY KEY, DESCRICAO VARCHAR(60))";
+	private static final String criarModalidades = "CREATE TABLE IF NOT EXISTS modalidades (ID SERIAL PRIMARY KEY, MODALIDADE VARCHAR(60))";
 	
-	private static final String criarMatriculasModalidades = "CREATE TABLE matriculas_modalidades (MATRICULAS_CODIGO INT, MODALIDADES_CODIGO INT, GRADUACOES_CODIGO INT, PLANOS_CODIGO INT)";
+	private static final String criarMatriculasModalidades = "CREATE TABLE IF NOT EXISTS matriculas_modalidades (CODIGO_MATRICULA INT NOT NULL, MODALIDADES VARCHAR(60) NOT NULL, GRADUACAO VARCHAR(60), PLANO VARCHAR(60), DATA_INICIO DATE, DATA_FIM DATE)";
 	
-	private static final String criarPlanos = "CREATE TABLE planos (ID SERIAL PRIMARY KEY, DESCRICAO VARCHAR(60), MODALIDADES_CODIGO INT, VALOR_MENSAL FLOAT(5), OBSERVACAO VARCHAR(60))";
+	private static final String criarPlanos = "CREATE TABLE IF NOT EXISTS planos (ID SERIAL PRIMARY KEY, DESCRICAO VARCHAR(60), MODALIDADE VARCHAR(60), PLANO VARCHAR(60) NOT NULL)";
 	
 	
 	private String url = "jdbc:postgresql://localhost:5432/postgres";
@@ -48,6 +50,7 @@ public class CriarTabelas {
 					statement.execute(criarModalidades);
 					statement.execute(criarMatriculasModalidades);
 					statement.execute(criarPlanos);
+                                        statement.execute(criarFaturasMatriculas);
 			
 		} catch (SQLException e) {
 			printSQLException(e);

@@ -1,6 +1,9 @@
 package graphic;
 
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
@@ -22,7 +25,7 @@ public class MenuWindow {
     private JMenuItem itemCadastroPlano;
 
     private JMenu menuFinanceiro;
-    private JMenuItem itemFinanceiroMatricula;
+    private JMenuItem itemFinanceiroControle;
 
     private JMenu menuUtilitarios;
     private JMenuItem itemBackup;
@@ -95,8 +98,26 @@ public class MenuWindow {
         menuCadastro.add(itemCadastroGraduacao);
         menuCadastro.add(itemCadastroPlano);
 
+//Menu Financeiro
+        menuFinanceiro = new JMenu("Financeiro");
+        itemFinanceiroControle = new JMenuItem();
+        itemFinanceiroControle.setAction(new AbstractAction("Controle de Alunos") {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new ControleAlunos().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MenuWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        menuFinanceiro.add(itemFinanceiroControle);
+
         menuBar.add(menuSistema);
         menuBar.add(menuCadastro);
+        menuBar.add(menuFinanceiro);
 
         framePrincipal = new JFrame("Sistema de Academia de Artes Marciais");
         framePrincipal.setSize(500, 500);

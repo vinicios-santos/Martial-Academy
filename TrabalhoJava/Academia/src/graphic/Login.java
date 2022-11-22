@@ -4,7 +4,7 @@
  */
 package graphic;
 
-//import config.CriarTabelas;
+import config.CriarTabelas;
 import controller.LoginController;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -154,10 +154,10 @@ public class Login extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) /*throws Exception*/{
+    public static void main(String args[]) throws Exception{
 
-//        CriarTabelas tabelas = new CriarTabelas();;
-//        tabelas.criarTabela();
+        CriarTabelas tabelas = new CriarTabelas();;;;
+        tabelas.criarTabela();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
